@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\lib\HKX2Builders\HKX2Builders\HKX2Builders.csproj" />
+        <ProjectReference Include="..\lib\HKX2Builders\lib\HKX2Library\HKX2\HKX2.csproj" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,5 @@
+cffi==1.14.6
+clr-loader==0.1.6
+fake-bpy-module-latest==20210905
+pycparser==2.20
+pythonnet @ git+https://github.com/pythonnet/pythonnet@dc3c818865146915cdba392844eb744835e01842

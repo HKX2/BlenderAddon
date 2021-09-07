@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlenderAddon", "BlenderAddon\BlenderAddon.csproj", "{2ADE96B8-BF0B-4668-AA9E-9EC775E1CD3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HKX2Builders", "lib\HKX2Builders\HKX2Builders\HKX2Builders.csproj", "{8C7AF2F3-5934-458E-91A1-5BB7946EE3FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HKX2", "lib\HKX2Builders\lib\HKX2Library\HKX2\HKX2.csproj", "{E4916D5B-B55D-47D2-981B-1313222FD158}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2ADE96B8-BF0B-4668-AA9E-9EC775E1CD3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ADE96B8-BF0B-4668-AA9E-9EC775E1CD3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4916D5B-B55D-47D2-981B-1313222FD158}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4916D5B-B55D-47D2-981B-1313222FD158}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C7AF2F3-5934-458E-91A1-5BB7946EE3FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C7AF2F3-5934-458E-91A1-5BB7946EE3FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+EndGlobal

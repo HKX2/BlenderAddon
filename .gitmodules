@@ -1,0 +1,3 @@
+[submodule "lib/BlenderAddon/lib/HKX2Builders"]
+	path = lib/BlenderAddon/lib/HKX2Builders
+	url = https://gitlab.com/HKX2/HKX2Builders

@@ -7,6 +7,13 @@
     <ItemGroup>
         <ProjectReference Include="..\lib\HKX2Builders\HKX2Builders\HKX2Builders.csproj" />
         <ProjectReference Include="..\lib\HKX2Builders\lib\HKX2Library\HKX2\HKX2.csproj" />
+
+        <Content Include="/usr/x86_64-w64-mingw32/bin/libstdc++-6.dll">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="/usr/x86_64-w64-mingw32/bin/libgomp-1.dll">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
 
 </Project>

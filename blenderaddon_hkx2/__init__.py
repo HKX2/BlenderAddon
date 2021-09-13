@@ -42,7 +42,6 @@ class HKX2Panel(bpy.types.Panel):
     bl_region_type = "UI"
     bl_context = "objectmode"
     bl_label = "HKX2"
-    bl_options = {"DRAW_BOX"}
 
     def draw(self, context: bpy.types.Context):
         if not PYTHONNET_INSTALLED:

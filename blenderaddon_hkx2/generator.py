@@ -1,4 +1,4 @@
-from .util import BlenderAddon, HKX2Builders, System
+from .util import BlenderAddon, HKX2Builders, HKX2, System
 
 from pathlib import Path
 
@@ -30,6 +30,15 @@ class GeneratorOperator(bpy.types.Operator, bpy_extras.io_utils.ExportHelper):
         default=False,
     )  # type: ignore
 
+    platform: bpy.props.EnumProperty(
+        name="Platform",
+        description="Choose which platform header to use for generating",
+        items=(
+            ("wiiu", "Wii U", ""),
+            ("nx", "Switch", ""),
+        ),  # type: ignore
+        default="wiiu",  # type: ignore
+    )  # type: ignore
     havok_type: bpy.props.EnumProperty(
         name="Havok type",
         description="Choose which type of file to generate",
@@ -101,6 +110,7 @@ class GeneratorOperator(bpy.types.Operator, bpy_extras.io_utils.ExportHelper):
         box.prop(self, "selected_objects_only")  # type: ignore
 
         box = self.layout.box()
+        box.prop(self, "platform", text="")  # type: ignore
         box.prop(self, "havok_type", text="")  # type: ignore
 
         if self.havok_type in (".hkrb", ".hktmrb", ".hksc"):
@@ -181,18 +191,24 @@ class GeneratorOperator(bpy.types.Operator, bpy_extras.io_utils.ExportHelper):
 
             bm.clear()
 
+        header = None
+        if self.platform == "wiiu":
+            header = HKX2.HKXHeader.BotwWiiu()
+        elif self.platform == "nx":
+            header = HKX2.HKXHeader.BotwNx()
+
         try:
             if self.havok_type == ".hkrb":
                 BlenderAddon.Generator.GenerateHkrb(
-                    self.filepath, vertices, indices, collision_info
+                    self.filepath, header, vertices, indices, collision_info
                 )
             elif self.havok_type == ".hktmrb":
                 BlenderAddon.Generator.GenerateHktmrb(
-                    self.filepath, vertices, indices, collision_info
+                    self.filepath, header, vertices, indices, collision_info
                 )
             elif self.havok_type == ".hksc":
                 BlenderAddon.Generator.GenerateHksc(
-                    self.filepath, vertices, indices, collision_info
+                    self.filepath, header, vertices, indices, collision_info
                 )
             elif self.havok_type == ".hknm2":
                 config = HKX2Builders.hkaiNavMeshBuilder.Config.Default()
@@ -206,7 +222,7 @@ class GeneratorOperator(bpy.types.Operator, bpy_extras.io_utils.ExportHelper):
                 config.MinRegionArea = self.min_region_area
 
                 BlenderAddon.Generator.GenerateHknm2(
-                    self.filepath, vertices, indices, config
+                    self.filepath, header, vertices, indices, config
                 )
         except Exception as e:
             self.report({"ERROR"}, f"{type(e).__name__}: {e}")

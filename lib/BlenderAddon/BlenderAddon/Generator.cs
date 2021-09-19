@@ -10,7 +10,7 @@ namespace BlenderAddon
 {
     public static class Generator
     {
-        public static void GenerateHksc(string outPath, List<Vector3> verts, List<uint> indices,
+        public static void GenerateHksc(string outPath, HKXHeader header, List<Vector3> verts, List<uint> indices,
             IEnumerable<Tuple<uint, uint>> primitiveInfos)
         {
             var staticCompoundShape = new hkpStaticCompoundShape
@@ -201,10 +201,10 @@ namespace BlenderAddon
             };
 
             using var ws = File.OpenWrite(outPath);
-            Util.WriteBotwHKX(roots, HKXHeader.BotwNx(), ".hksc", ws);
+            Util.WriteBotwHKX(roots, header, ".hksc", ws);
         }
 
-        public static void GenerateHkrb(string outPath, List<Vector3> verts, List<uint> indices,
+        public static void GenerateHkrb(string outPath, HKXHeader header, List<Vector3> verts, List<uint> indices,
             IEnumerable<Tuple<uint, uint>> primitiveInfos)
         {
             var roots = new List<IHavokObject>
@@ -326,10 +326,10 @@ namespace BlenderAddon
             };
 
             using var ws = File.OpenWrite(outPath);
-            Util.WriteBotwHKX(roots, HKXHeader.BotwNx(), ".hkrb", ws);
+            Util.WriteBotwHKX(roots, header, ".hkrb", ws);
         }
 
-        public static void GenerateHktmrb(string outPath, List<Vector3> verts, List<uint> indices,
+        public static void GenerateHktmrb(string outPath, HKXHeader header, List<Vector3> verts, List<uint> indices,
             IEnumerable<Tuple<uint, uint>> primitiveInfos)
         {
             var roots = new List<IHavokObject>
@@ -433,10 +433,10 @@ namespace BlenderAddon
             };
 
             using var ws = File.OpenWrite(outPath);
-            Util.WriteBotwHKX(roots, HKXHeader.BotwNx(), ".hktmrb", ws);
+            Util.WriteBotwHKX(roots, header, ".hktmrb", ws);
         }
 
-        public static void GenerateHknm2(string outPath, List<Vector3> verts, List<uint> indices,
+        public static void GenerateHknm2(string outPath, HKXHeader header, List<Vector3> verts, List<uint> indices,
             hkaiNavMeshBuilder.Config config)
         {
             var navMesh = hkaiNavMeshBuilder.Build(
@@ -533,7 +533,7 @@ namespace BlenderAddon
             };
 
             using var ws = File.OpenWrite(outPath);
-            Util.WriteBotwHKX(roots, HKXHeader.BotwNx(), ".hknm2", ws);
+            Util.WriteBotwHKX(roots, header, ".hknm2", ws);
         }
     }
 }

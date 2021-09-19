@@ -98,22 +98,22 @@ class GeneratorOperator(bpy.types.Operator, bpy_extras.io_utils.ExportHelper):
         self.on_havok_type_change(context)
 
         box = self.layout.box()
-        box.prop(self, "selected_objects_only")
+        box.prop(self, "selected_objects_only")  # type: ignore
 
         box = self.layout.box()
         box.prop(self, "havok_type", text="")  # type: ignore
 
         if self.havok_type in (".hkrb", ".hktmrb", ".hksc"):
-            box.prop(self, "use_custom_collision_info")
+            box.prop(self, "use_custom_collision_info")  # type: ignore
 
         if self.havok_type == ".hknm2":
-            box.prop(self, "cell_size")
-            box.prop(self, "cell_height")
-            box.prop(self, "walkable_slope_angle")
-            box.prop(self, "walkable_height")
-            box.prop(self, "walkable_climb")
-            box.prop(self, "walkable_radius")
-            box.prop(self, "min_region_area")
+            box.prop(self, "cell_size")  # type: ignore
+            box.prop(self, "cell_height")  # type: ignore
+            box.prop(self, "walkable_slope_angle")  # type: ignore
+            box.prop(self, "walkable_height")  # type: ignore
+            box.prop(self, "walkable_climb")  # type: ignore
+            box.prop(self, "walkable_radius")  # type: ignore
+            box.prop(self, "min_region_area")  # type: ignore
 
     def execute(self, context: bpy.types.Context):
         vertices = System.Collections.Generic.List[System.Numerics.Vector3]()

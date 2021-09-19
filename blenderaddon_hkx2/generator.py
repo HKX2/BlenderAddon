@@ -152,7 +152,10 @@ class GeneratorOperator(bpy.types.Operator, bpy_extras.io_utils.ExportHelper):
         bm = bmesh.new()
 
         for obj in objects_to_iter:
-            me = obj.data
+            dg = bpy.context.evaluated_depsgraph_get()
+            obj = obj.evaluated_get(dg)
+            me = obj.to_mesh()
+
             bm.from_mesh(me)
 
             # Coincidentally happens to not take effect on the original mesh

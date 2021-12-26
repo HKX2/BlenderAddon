@@ -24,9 +24,11 @@ EOF
 cp ./lib/BlenderAddon/BlenderAddon/bin/Debug/net5.0/*.{so,dll} ./build/blenderaddon_hkx2/lib/
 
 if [[ $1 == "test" ]]; then
-	rm -rf ~/.config/blender/2.93/scripts/addons/blenderaddon_hkx2
-	cp -r ./build/blenderaddon_hkx2 ~/.config/blender/2.93/scripts/addons/
-	rm -rf ./build/
+  for version in ~/.config/blender/*; do
+    rm -rf $version/scripts/addons/blenderaddon_hkx2/
+    cp -r ./build/blenderaddon_hkx2/ $version/scripts/addons/
+  done
+  rm -rf ./build/
 fi
 
 if [[ $1 == "publish" ]]; then

@@ -30,8 +30,8 @@ if [[ $1 == "test" ]]; then
 fi
 
 if [[ $1 == "publish" ]]; then
-	pushd ./build/
-	zip -r ../blenderaddon_hkx2.zip ./blenderaddon_hkx2
-	popd
-	rm -rf ./build/
+  pushd ./build/
+  zip -r ../blenderaddon_hkx2.zip ./blenderaddon_hkx2
+  popd
+  rm -rf ./build/
 fi

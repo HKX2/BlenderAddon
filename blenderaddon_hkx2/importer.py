@@ -17,19 +17,20 @@ class ImportPackfileOperator(bpy.types.Operator):
         default="",
         options={"HIDDEN"},
     )  # type: ignore
-    files: bpy.props.CollectionProperty(
-        type=bpy.types.OperatorFileListElement, options={"HIDDEN"}
-    )  # type: ignore
-    directory: bpy.props.StringProperty(
-        maxlen=1024, default="", subtype="FILE_PATH", options={"HIDDEN"}
-    )  # type: ignore
+    files: bpy.props.CollectionProperty(type=bpy.types.OperatorFileListElement,
+                                        options={"HIDDEN"})  # type: ignore
+    directory: bpy.props.StringProperty(maxlen=1024,
+                                        default="",
+                                        subtype="FILE_PATH",
+                                        options={"HIDDEN"})  # type: ignore
     filter_glob: bpy.props.StringProperty(
-        default="*.hkrb;*.hksc;*.hktmrb;*.hknm2", options={"HIDDEN"}
-    )  # type: ignore
+        default="*.hkrb;*.hksc;*.hktmrb;*.hknm2",
+        options={"HIDDEN"})  # type: ignore
 
     transform_teramesh: bpy.props.BoolProperty(
         name="Apply TeraMesh transforms",
-        description="Transform TeraMesh (.hktmrb) to match up with StaticCompound (.hksc)",
+        description=
+        "Transform TeraMesh (.hktmrb) to match up with StaticCompound (.hksc)",
         default=True,
     )  # type: ignore
     tile_size: bpy.props.FloatProperty(
@@ -48,10 +49,9 @@ class ImportPackfileOperator(bpy.types.Operator):
     )  # type: ignore
     use_unsafe_refresh: bpy.props.BoolProperty(
         name='Use "unsafe" viewport refresh',
-        description=(
-            "Allows using a Blender function to redraw the viewport after every file, "
-            "allowing to see some sort of progress indicator"
-        ),
+        description=
+        ("Allows using a Blender function to redraw the viewport after every file, "
+         "allowing to see some sort of progress indicator"),
         default=True,
     )  # type: ignore
 
@@ -88,7 +88,8 @@ class ImportPackfileOperator(bpy.types.Operator):
                 str(file_path),
                 self.transform_teramesh,
                 self.tile_size,
-                System.Numerics.Vector3(self.offset[0], self.offset[1], self.offset[2]),
+                System.Numerics.Vector3(self.offset[0], self.offset[1],
+                                        self.offset[2]),
             )
 
             # Create a bmesh for convex hull creation
@@ -124,7 +125,8 @@ class ImportPackfileOperator(bpy.types.Operator):
                 added_objects.append(obj)
 
             if not added_objects:
-                self.report({"WARNING"}, "No geometry in this file! (or cannot read!)")
+                self.report({"WARNING"},
+                            "No geometry in this file! (or cannot read!)")
                 return {"FINISHED"}
 
             # Join the objects together
@@ -135,8 +137,7 @@ class ImportPackfileOperator(bpy.types.Operator):
             added_objects[0].name = file_path.stem
             # Remove orphaned meshes
             [
-                bpy.data.meshes.remove(m)
-                for m in bpy.data.meshes
+                bpy.data.meshes.remove(m) for m in bpy.data.meshes
                 if (not m.users) and m.name.startswith("hk")
             ]
 

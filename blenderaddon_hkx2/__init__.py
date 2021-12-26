@@ -6,12 +6,10 @@ bl_info = {
     "version": (1, 0, 0),
 }
 
-
 from .util import initialize_libs
 from .dependencies import package_is_installed
 
 import bpy
-
 
 PYTHONNET_INSTALLED = package_is_installed("pythonnet")
 
@@ -27,12 +25,8 @@ try:
 except ImportError:
     PYTHONNET_INSTALLED = False
 
-
-OPERATORS = tuple(
-    globals()[key]
-    for key in globals().keys()
-    if ("Operator" in key) and (key != "DependenciesOperator")
-)
+OPERATORS = tuple(globals()[key] for key in globals().keys()
+                  if ("Operator" in key) and (key != "DependenciesOperator"))
 
 
 class HKX2Panel(bpy.types.Panel):

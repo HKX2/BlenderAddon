@@ -7,10 +7,8 @@ import sys
 import os
 import bpy
 
-
-PYTHON_EXECUTABLE = (
-    sys.executable if bpy.app.version > (2, 91, 0) else bpy.app.binary_path_python
-)
+PYTHON_EXECUTABLE = (sys.executable if bpy.app.version >
+                     (2, 91, 0) else bpy.app.binary_path_python)
 
 # Ensure Blender's modules directory exists
 SITE_DIR = ADDON_DIR.parent.parent / "modules"
@@ -28,9 +26,10 @@ def package_is_installed(package_name: str) -> bool:
 
 
 def install_package(package: str):
-    subprocess.check_call(
-        [PYTHON_EXECUTABLE, "-m", "pip", "install", "-t", str(SITE_DIR), package]
-    )
+    subprocess.check_call([
+        PYTHON_EXECUTABLE, "-m", "pip", "install", "-t",
+        str(SITE_DIR), package
+    ])
 
 
 class DependenciesOperator(bpy.types.Operator):

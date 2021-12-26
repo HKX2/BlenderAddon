@@ -86,7 +86,12 @@ SUB_MATERIALS = {
         "DgnLight": 4,
         "DgnHeavy": 5,
     },
-    "Water": {"1": 1, "2": 2, "3": 3, "StoneBottom": 4},
+    "Water": {
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "StoneBottom": 4
+    },
     "Wood": {
         "Thin": 1,
         "Thick": 2,
@@ -132,17 +137,14 @@ class CollisionInfoOperator(bpy.types.Operator):
 
     def sub_materials_callback(self, context: bpy.types.Context):
         material = SUB_MATERIALS.get(self.material)
-        sub_materials = (
-            (tuple((str(v), k, "") for k, v in material.items())) if material else ()
-        )
+        sub_materials = ((tuple(
+            (str(v), k, "") for k, v in material.items())) if material else ())
 
-        return (
-            (
-                "0",
-                "Default",
-                "",
-            ),
-        ) + sub_materials
+        return ((
+            "0",
+            "Default",
+            "",
+        ), ) + sub_materials
 
     def wall_codes_callback(self, context: bpy.types.Context):
         return tuple((w.name, w.name, "") for w in WallCodes)

@@ -10,13 +10,13 @@ cp -r ./blenderaddon_hkx2/ ./build/
 dotnet build ./lib/BlenderAddon/BlenderAddon.sln
 
 mkdir ./build/blenderaddon_hkx2/lib/
-cat >./build/blenderaddon_hkx2/lib/net5.0.runtimeconfig.json <<-EOF
+cat >./build/blenderaddon_hkx2/lib/net6.0.runtimeconfig.json <<-EOF
 	{
 	  "runtimeOptions": {
-	    "tfm": "net5.0",
+	    "tfm": "net6.0",
 	    "framework": {
 	      "name": "Microsoft.NETCore.App",
-	      "version": "5.0.2"
+	      "version": "6.0.0"
 	    }
 	  }
 	}

@@ -14,11 +14,11 @@ PYTHON_EXECUTABLE = (sys.executable if bpy.app.version >
 SITE_DIR = ADDON_DIR.parent.parent / "modules"
 SITE_DIR.mkdir(parents=True, exist_ok=True)
 
-# Python.NET repository
-PYTHONNET_REPO_URL = "https://github.com/pythonnet/pythonnet"
+# Last confirmed working commit (newer ones might work)
+PYTHONNET_COMMIT_HASH = "ec8b69fd35c24efffe39ea3aeb46e373efffb48b"
 
-# Commit to install from
-PYTHONNET_COMMIT_HASH = "ee0ab7f9decb2b088e82cdd994e203a2b645a099"
+# URL for `pip install`
+PYTHONNET = f"https://github.com/pythonnet/pythonnet/archive/{PYTHONNET_COMMIT_HASH}.zip"
 
 
 def package_is_installed(package_name: str) -> bool:
@@ -37,6 +37,6 @@ class DependenciesOperator(bpy.types.Operator):
     bl_label = "Install dependencies"
 
     def execute(self, context: bpy.types.Context):
-        install_package(f"git+{PYTHONNET_REPO_URL}@{PYTHONNET_COMMIT_HASH}")
+        install_package(PYTHONNET)
 
         os.execvp(sys.argv[0], sys.argv)

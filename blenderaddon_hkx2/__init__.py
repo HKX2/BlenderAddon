@@ -2,7 +2,7 @@ bl_info = {
     "name": "HKX2 Integration",
     "author": "kreny",
     "description": "Blender addon to accompany HKX2 library.",
-    "blender": (2, 93, 0),
+    "blender": (3, 0, 0),
     "version": (1, 0, 0),
 }
 

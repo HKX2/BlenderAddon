@@ -2,6 +2,7 @@ from typing import Tuple
 from enum import Enum
 
 import bpy
+from rna_prop_ui import rna_idprop_ui_prop_update
 
 
 class Materials(Enum):
@@ -303,6 +304,8 @@ class CollisionInfoOperator(bpy.types.Operator):
         for obj in selected_objs:
             obj["collision_filter_info"] = self.collision_filter_info
             obj["user_data"] = self.user_data
+            rna_idprop_ui_prop_update(obj, "collision_filter_info")
+            rna_idprop_ui_prop_update(obj, "user_data")
 
         return {"FINISHED"}
 

@@ -28,9 +28,11 @@ def initialize_libs():
     import BlenderAddon
     import System
 
-    globals().update({
-        "HKX2": HKX2,
-        "HKX2Builders": HKX2Builders,
-        "BlenderAddon": BlenderAddon,
-        "System": System,
-    })
+    globals().update(
+        {
+            "HKX2": HKX2,
+            "HKX2Builders": HKX2Builders,
+            "BlenderAddon": BlenderAddon,
+            "System": System,
+        }
+    )

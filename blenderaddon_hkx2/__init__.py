@@ -25,8 +25,11 @@ try:
 except ImportError:
     PYTHONNET_INSTALLED = False
 
-OPERATORS = tuple(globals()[key] for key in globals().keys()
-                  if ("Operator" in key) and (key != "DependenciesOperator"))
+OPERATORS = tuple(
+    globals()[key]
+    for key in globals().keys()
+    if ("Operator" in key) and (key != "DependenciesOperator")
+)
 
 
 class HKX2Panel(bpy.types.Panel):

@@ -21,8 +21,8 @@ class GeneratorOperator(bpy.types.Operator, bpy_extras.io_utils.ExportHelper):
         options={"HIDDEN"},
     )  # type: ignore
     filter_glob: bpy.props.StringProperty(
-        default="*.hkrb;*.hksc;*.hktmrb;*.hknm2",
-        options={"HIDDEN"})  # type: ignore
+        default="*.hkrb;*.hksc;*.hktmrb;*.hknm2", options={"HIDDEN"}
+    )  # type: ignore
 
     selected_objects_only: bpy.props.BoolProperty(
         name="Selected objects only",
@@ -53,8 +53,7 @@ class GeneratorOperator(bpy.types.Operator, bpy_extras.io_utils.ExportHelper):
 
     use_custom_collision_info: bpy.props.BoolProperty(
         name="Use custom collision info",
-        description=
-        "If provided in object properties, use custom collision info",
+        description="If provided in object properties, use custom collision info",
         default=True,
     )  # type: ignore
 
@@ -101,7 +100,8 @@ class GeneratorOperator(bpy.types.Operator, bpy_extras.io_utils.ExportHelper):
             return
 
         sfile.params.filename = str(
-            Path(sfile.params.filename).with_suffix(self.havok_type))
+            Path(sfile.params.filename).with_suffix(self.havok_type)
+        )
 
     def draw(self, context: bpy.types.Context):
         self.on_havok_type_change(context)
@@ -128,12 +128,17 @@ class GeneratorOperator(bpy.types.Operator, bpy_extras.io_utils.ExportHelper):
     def execute(self, context: bpy.types.Context):
         vertices = System.Collections.Generic.List[System.Numerics.Vector3]()
         indices = System.Collections.Generic.List[System.UInt32]()
-        collision_info = System.Collections.Generic.List[System.Tuple[
-            System.UInt32, System.UInt32]]()
+        collision_info = System.Collections.Generic.List[
+            System.Tuple[System.UInt32, System.UInt32]
+        ]()
 
         objects_to_iter = [
-            o for o in (bpy.context.selected_objects if self.
-                        selected_objects_only else bpy.data.objects)
+            o
+            for o in (
+                bpy.context.selected_objects
+                if self.selected_objects_only
+                else bpy.data.objects
+            )
             if o.type == "MESH"
         ]
 
@@ -173,15 +178,18 @@ class GeneratorOperator(bpy.types.Operator, bpy_extras.io_utils.ExportHelper):
                 user_data_string = obj.get("user_data")
 
                 if collision_filter_info_string:
-                    collision_filter_info = int(collision_filter_info_string,
-                                                base=16)
+                    collision_filter_info = int(collision_filter_info_string, base=16)
 
                 if user_data_string:
                     user_data = int(user_data_string, base=16)
 
             [
-                collision_info.Add(System.Tuple[System.UInt32, System.UInt32](
-                    collision_filter_info, user_data)) for _ in bm.faces
+                collision_info.Add(
+                    System.Tuple[System.UInt32, System.UInt32](
+                        collision_filter_info, user_data
+                    )
+                )
+                for _ in bm.faces
             ]
 
             bm.clear()
@@ -194,17 +202,17 @@ class GeneratorOperator(bpy.types.Operator, bpy_extras.io_utils.ExportHelper):
 
         try:
             if self.havok_type == ".hkrb":
-                BlenderAddon.Generator.GenerateHkrb(self.filepath, header,
-                                                    vertices, indices,
-                                                    collision_info)
+                BlenderAddon.Generator.GenerateHkrb(
+                    self.filepath, header, vertices, indices, collision_info
+                )
             elif self.havok_type == ".hktmrb":
-                BlenderAddon.Generator.GenerateHktmrb(self.filepath, header,
-                                                      vertices, indices,
-                                                      collision_info)
+                BlenderAddon.Generator.GenerateHktmrb(
+                    self.filepath, header, vertices, indices, collision_info
+                )
             elif self.havok_type == ".hksc":
-                BlenderAddon.Generator.GenerateHksc(self.filepath, header,
-                                                    vertices, indices,
-                                                    collision_info)
+                BlenderAddon.Generator.GenerateHksc(
+                    self.filepath, header, vertices, indices, collision_info
+                )
             elif self.havok_type == ".hknm2":
                 config = HKX2Builders.hkaiNavMeshBuilder.Config.Default()
 
@@ -216,8 +224,9 @@ class GeneratorOperator(bpy.types.Operator, bpy_extras.io_utils.ExportHelper):
                 config.WalkableRadius = self.walkable_radius
                 config.MinRegionArea = self.min_region_area
 
-                BlenderAddon.Generator.GenerateHknm2(self.filepath, header,
-                                                     vertices, indices, config)
+                BlenderAddon.Generator.GenerateHknm2(
+                    self.filepath, header, vertices, indices, config
+                )
         except Exception as e:
             self.report({"ERROR"}, f"{type(e).__name__}: {e}")
             return {"CANCELLED"}

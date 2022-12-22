@@ -11,7 +11,7 @@ def initialize_libs():
     from clr_loader import get_coreclr
     from pythonnet import set_runtime
 
-    rt = get_coreclr(str(lib_dir / "net6.0.runtimeconfig.json"))
+    rt = get_coreclr()
     set_runtime(rt)
 
     sys.path.insert(0, str(lib_dir))

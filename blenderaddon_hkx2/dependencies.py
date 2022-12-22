@@ -15,11 +15,7 @@ PYTHON_EXECUTABLE = (
 SITE_DIR = ADDON_DIR.parent.parent / "modules"
 SITE_DIR.mkdir(parents=True, exist_ok=True)
 
-# Last confirmed working commit (newer ones might work)
-PYTHONNET_COMMIT_HASH = "ec8b69fd35c24efffe39ea3aeb46e373efffb48b"
-
-# URL for `pip install`
-PYTHONNET = f"https://github.com/pythonnet/pythonnet/archive/{PYTHONNET_COMMIT_HASH}.zip"
+PYTHONNET = "pythonnet>=3"
 
 
 def package_is_installed(package_name: str) -> bool:
